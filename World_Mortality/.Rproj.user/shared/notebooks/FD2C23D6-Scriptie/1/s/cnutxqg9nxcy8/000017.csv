@@ -1,0 +1,2 @@
+"0","random <- rnorm(40,0,1)"
+"0","acf(random)"
