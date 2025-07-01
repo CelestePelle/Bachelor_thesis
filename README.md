@@ -5,7 +5,8 @@ Welcome to this repository containing the datasets and R code used in my researc
 In this repository you will find the processed data files under **Datasets**, and the R scripts that use the data sets.  
 
 ## The datasets
-The **Datasets** folder contains the following datasets: 
+The **Datasets** folder contains the following datasets and tables: 
+- locations_temperatures: Contains the coordinates used to access the temperature data for the selected countries.
 - Temperatures.csv: Contains the daily minimum and maximum temperatures for the selected countries analyzed in the research, from December 2014 till the end of 2023. 
 - WHO_official.csv: Contains the total number of reported COVID-19 deaths from the beginning of the pandemic until the end of 2021 in the column "Cumulative_deaths" for the selection of countries.
 - excess_mortality.csv: Contains the computed excess mortality presented as a dataframe.
