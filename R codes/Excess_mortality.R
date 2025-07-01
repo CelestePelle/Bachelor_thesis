@@ -264,7 +264,7 @@ for(country in countries_sorted){
   #creating the predictors
   predictors_full <- create_predictors(data, pre,m, test=FALSE)
   predictors1 <-predictors_full[,c(1,3:(m+3))] #includes year, time units and deaths
-  predictors <- predictors_full[,c(1,3:(m+3),(m+5),(m+8),(m+9),(m+12))] #includes final selection + deaths
+  predictors <- predictors_full[,c(1,3:(m+3),(m+5),(m+8),(m+9),(m+13))] #includes final selection + deaths
   
   #fitting the models
   model1 <- lm(Deaths ~ 0 + ., data=predictors1)  #eLife model
@@ -279,7 +279,7 @@ for(country in countries_sorted){
   data_2020 <- (data$Year == 2020) & (data$Unit < 53)
   predictors2020_full <- create_predictors(data,data_2020,m,test=TRUE)
   predictors2020_1 <- predictors2020_full[,c(1,3:(m+2))]
-  predictors2020 <- predictors2020_full[,c(1,3:(m+2),(m+4),(m+7),(m+8),(m+11))] 
+  predictors2020 <- predictors2020_full[,c(1,3:(m+2),(m+4),(m+7),(m+8),(m+12))] 
   
   #predict baseline values for 2020 using the regression model
   baseline1 <- stats::predict(model1, newdata = predictors2020_1)
@@ -292,12 +292,12 @@ for(country in countries_sorted){
   
   #predict() doesn't add the correlation structure of the errors,
   #we need to handle that manually
-  res_future <- numeric(length(predictions[[3]]))
+  res_future <- numeric(length(baseline))
   for(j in 1:length(res_future)){
     if(j==1){
       res_future[j] <- phi * last_res
     } else{
-      res_future[j] <- phi3 * res_future[j-1]
+      res_future[j] <- phi * res_future[j-1]
     }
     baseline[j] <- res_future[j] + baseline[j]
   }

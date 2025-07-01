@@ -2,6 +2,7 @@
 
 library(nlme)
 library(dplyr)
+library(lubridate)
 temperature <- read.csv("Temperatures.csv")
 colnames(temperature) <- c('date', 'temp_max', 'temp_min', 'country')
 world_mortality_df <- read.csv("world_mortality.csv")
@@ -293,8 +294,13 @@ for(country in countries_sorted){
 
 kept <- lapply(removed, function(x) 1 - x)
 
-kept_sum <- rep(0,12)
+kept_sum <- rep(0,12) #kept_sum counts the number of countries that kept each covariate
 for(i in 1:length(countries_sorted)){
   kept_sum <- kept_sum + kept[[i]]
 }
-print(kept_sum) #kept_sum counts the number of countries that kept each covariate
+covariate_names <- c('Year', 'Unit', 'Temp_max', 'Temp_max_1', 'Temp_max_2', 'Temp_max_3', 'Temp_min', 'Temp_min_1', 'Temp_min_2', 'Temp_min_3', 'Max_sq', 'Min_sq' )
+covariates_kept <- data.frame(
+  Covariate = covariate_names, 
+  Count = kept_sum
+)
+print(covariates_kept)
